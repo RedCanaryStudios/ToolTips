@@ -38,11 +38,11 @@ local ToolTip = script.ToolTip
 local currentConnection
 
 ToolTips.NewPrototype = function(t)
-    assert(t.Title and t.Description, "Provided ToolTip attributes are not sufficient (Title or Description is missing).")
+    t = t or {}
     
     local description = {
-        Title = t.Title;
-        Description = t.Description;
+        Title = t.Title or "";
+        Description = t.Description or "";
         
         CreateToolTip = function(self)
             return ToolTips.CreateToolTip(self)
@@ -54,13 +54,15 @@ end
 
 ToolTips.CreateToolTip = function(prototype)
     assert(objType(prototype) == "ToolTipPrototype", "The given object is not a prototype.")
+    assert(prototype.Title and prototype.Description, "Provided ToolTip attributes are not sufficient (Title or Description is missing).")
     
     local TT = {
         prototype = prototype;
         
-        SetVisible = function(self)
+        Set = function(self)
             ToolTips.SetToolTip(self)
         end;
+        
     }
     
     return newObject(TT, nil, "ToolTip")
