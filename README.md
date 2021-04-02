@@ -4,8 +4,16 @@ Usage:
 
 ```lua
 local ToolTips = require(script.ToolTips)
-local prototype = ToolTips.NewPrototype {Title = "TOOLTIP"; Description = "Test\nTest"}
+
+local prototype = ToolTips.NewPrototype()
+prototype.Title = "TOOLTIP"
+prototype.Description = [[
+  Test
+  Test
+]]
+
 local TT = ToolTips.CreateToolTip(prototype)
+
 ToolTips.SetToolTip(TT)
 ToolTips.SetVisible(true)
 ```
